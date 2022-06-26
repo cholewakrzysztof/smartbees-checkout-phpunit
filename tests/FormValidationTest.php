@@ -19,6 +19,7 @@ class FormValidationTest extends TestCase
         "total":12599,
         "comment":""}';
 
+    public $require_path = './../send_order.php';
     /**
      * @runInSeparateProcess
      */
@@ -26,7 +27,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get; 
         $_GET["test"] = "test podstawowy \n";
 
-        require './../send_order.php';
+        require $this->require_path;
          $this->assertTrue(valid_data($data));
     }
 
@@ -37,7 +38,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get; 
         $_GET["test"] = "Test poprawności imienia \n";
 
-        require './../send_order.php';
+        require $this->require_path;
 
         $data->name="";
          $this->assertFalse(valid_data($data));
@@ -50,7 +51,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get; 
         $_GET["test"] = "Test poprawności nazwiska \n";
 
-        require './../send_order.php';
+        require $this->require_path;
 
         $data->surname="";
          $this->assertFalse(valid_data($data));
@@ -63,7 +64,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get; 
         $_GET["test"] = "Test poprawności kraju \n";
 
-        require './../send_order.php';
+        require $this->require_path;
 
         $data->country="England";
          $this->assertFalse(valid_data($data));
@@ -75,7 +76,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get; 
         $_GET["test"] = "Test poprawności ulicy \n";
 
-        require './../send_order.php';
+        require $this->require_path;
 
         $data->street="Lorem ipsum dolor sit amet viverra fusce.";
          $this->assertFalse(valid_data($data));
@@ -87,7 +88,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get; 
         $_GET["test"] = "Test poprawności kodu pocztowego \n";
 
-        require './../send_order.php';
+        require $this->require_path;
 
         $data->zip_code="45-123";
          $this->assertTrue(valid_data($data));
@@ -99,7 +100,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get; 
         $_GET["test"] = "Test drugi poprawności kodu pocztowego \n";
 
-        require './../send_order.php';
+        require $this->require_path;
 
         $data->zip_code="a-123";
          $this->assertFalse(valid_data($data));
@@ -111,7 +112,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get; 
         $_GET["test"] = "Test poprawności numeru telefonu \n";
 
-        require './../send_order.php';
+        require $this->require_path;
 
         $data->phone="qbc123569";
          $this->assertFalse(valid_data($data));
@@ -123,7 +124,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get; 
         $_GET["test"] = "Test poprawności sposobu dostawy \n";
 
-        require './../send_order.php';
+        require $this->require_path;
 
         $data->deliver_type="";
          $this->assertFalse(valid_data($data));
@@ -135,7 +136,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get; 
         $_GET["test"] = "Test poprawności sposobu zapłaty \n";
 
-        require './../send_order.php';
+        require $this->require_path;
 
         $data->payment_type="";
          $this->assertFalse(valid_data($data));
@@ -147,7 +148,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get; 
         $_GET["test"] = "Test poprawności ceny końcowej \n";
 
-        require './../send_order.php';
+        require $this->require_path;
 
         $data->total="";
          $this->assertFalse(valid_data($data));
@@ -159,7 +160,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get; 
         $_GET["test"] = "Test drugi poprawności ceny końcowej \n";
 
-        require './../send_order.php';
+        require $this->require_path;
 
         $data->total=1.4;
          $this->assertFalse(valid_data($data));
@@ -171,7 +172,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get;
         $_GET["test"] = "Test poprawności komentarza \n";
 
-        require './../send_order.php';
+        require $this->require_path;
 
         $data->comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget nisl nec nibh euismod accumsan. Integer vehicula convallis vehicula. Nam at nulla ipsum. Suspendisse eu viverra sem. Vestibulum enim dui, vehicula non purus vel, eleifend volutpat. ";
          $this->assertFalse(valid_data($data));
@@ -183,7 +184,7 @@ class FormValidationTest extends TestCase
     public function testShouldConnect(){
         $_GET["data"] = $this->suitable_get;
         $_GET["test"] = "Test poprawności łączenia z bazą \n";
-        require './../send_order.php';
+        require $this->require_path;
 
         $this->assertEquals(connect("localhost","root","","checkout")->error,null);
     }
@@ -195,7 +196,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get;
         $_GET["test"] = "Test generowania kodu \n";
 
-        require './../send_order.php';
+        require $this->require_path;
         $conn = connect("localhost","root","","checkout");
         $order_code = gen_code($conn);
         
@@ -208,7 +209,7 @@ class FormValidationTest extends TestCase
         $_GET["data"] = $this->suitable_get;
         $_GET["test"] = "Test drugi generowania kodu \n";
 
-        require './../send_order.php';
+        require $this->require_path;
         $conn = connect("localhost","root","","checkout");
         $order_code = gen_code($conn);
         
@@ -223,7 +224,7 @@ class FormValidationTest extends TestCase
         $_GET["test"] = "Test dodania do bazy \n";
 
 
-        require './../send_order.php';
+        require $this->require_path;
         $conn = connect("localhost","root","","checkout");
         $order_code = gen_code($conn);
         $result = send_query($data,$conn,$order_code);
