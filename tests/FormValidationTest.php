@@ -24,7 +24,7 @@ class FormValidationTest extends TestCase
      */
      public function testShouldBeTrue(){
         $_GET["data"] = $this->suitable_get; 
-        $_GET["test"] = true;
+        $_GET["test"] = "test podstawowy \n";
 
         require './../send_order.php';
          $this->assertTrue(valid_data($data));
@@ -35,7 +35,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldBeFalseName(){
         $_GET["data"] = $this->suitable_get; 
-        $_GET["test"] = true;
+        $_GET["test"] = "Test poprawności imienia \n";
 
         require './../send_order.php';
 
@@ -48,7 +48,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldBeFalseSurname(){
         $_GET["data"] = $this->suitable_get; 
-        $_GET["test"] = true;
+        $_GET["test"] = "Test poprawności nazwiska \n";
 
         require './../send_order.php';
 
@@ -61,7 +61,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldBeFalseCountry(){
         $_GET["data"] = $this->suitable_get; 
-        $_GET["test"] = true;
+        $_GET["test"] = "Test poprawności kraju \n";
 
         require './../send_order.php';
 
@@ -73,7 +73,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldBeFalseStreet(){
         $_GET["data"] = $this->suitable_get; 
-        $_GET["test"] = true;
+        $_GET["test"] = "Test poprawności ulicy \n";
 
         require './../send_order.php';
 
@@ -85,7 +85,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldBeTrueZipCode(){
         $_GET["data"] = $this->suitable_get; 
-        $_GET["test"] = true;
+        $_GET["test"] = "Test poprawności kodu pocztowego \n";
 
         require './../send_order.php';
 
@@ -97,7 +97,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldBeFalseZipCode(){
         $_GET["data"] = $this->suitable_get; 
-        $_GET["test"] = true;
+        $_GET["test"] = "Test drugi poprawności kodu pocztowego \n";
 
         require './../send_order.php';
 
@@ -109,7 +109,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldBeFalsePhone(){
         $_GET["data"] = $this->suitable_get; 
-        $_GET["test"] = true;
+        $_GET["test"] = "Test poprawności numeru telefonu \n";
 
         require './../send_order.php';
 
@@ -121,7 +121,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldBeFalseDeliverType(){
         $_GET["data"] = $this->suitable_get; 
-        $_GET["test"] = true;
+        $_GET["test"] = "Test poprawności sposobu dostawy \n";
 
         require './../send_order.php';
 
@@ -133,7 +133,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldBeFalsePaymentType(){
         $_GET["data"] = $this->suitable_get; 
-        $_GET["test"] = true;
+        $_GET["test"] = "Test poprawności sposobu zapłaty \n";
 
         require './../send_order.php';
 
@@ -145,7 +145,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldBeFalseTotal(){
         $_GET["data"] = $this->suitable_get; 
-        $_GET["test"] = true;
+        $_GET["test"] = "Test poprawności ceny końcowej \n";
 
         require './../send_order.php';
 
@@ -157,7 +157,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldBeFalseTotal2(){
         $_GET["data"] = $this->suitable_get; 
-        $_GET["test"] = true;
+        $_GET["test"] = "Test drugi poprawności ceny końcowej \n";
 
         require './../send_order.php';
 
@@ -169,7 +169,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldBeFalseComment(){
         $_GET["data"] = $this->suitable_get;
-        $_GET["test"] = true;
+        $_GET["test"] = "Test poprawności komentarza \n";
 
         require './../send_order.php';
 
@@ -182,7 +182,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldConnect(){
         $_GET["data"] = $this->suitable_get;
-        $_GET["test"] = true;
+        $_GET["test"] = "Test poprawności łączenia z bazą \n";
         require './../send_order.php';
 
         $this->assertEquals(connect("localhost","root","","checkout")->error,null);
@@ -193,6 +193,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldGenCode(){
         $_GET["data"] = $this->suitable_get;
+        $_GET["test"] = "Test generowania kodu \n";
 
         require './../send_order.php';
         $conn = connect("localhost","root","","checkout");
@@ -205,6 +206,7 @@ class FormValidationTest extends TestCase
      */
     public function testShouldGenCodeLength(){
         $_GET["data"] = $this->suitable_get;
+        $_GET["test"] = "Test drugi generowania kodu \n";
 
         require './../send_order.php';
         $conn = connect("localhost","root","","checkout");
@@ -218,6 +220,8 @@ class FormValidationTest extends TestCase
      */
     public function testShouldAddToBase(){
         $_GET["data"] = $this->suitable_get;
+        $_GET["test"] = "Test dodania do bazy \n";
+
 
         require './../send_order.php';
         $conn = connect("localhost","root","","checkout");
